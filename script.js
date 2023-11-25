@@ -4,10 +4,16 @@ let list = document.querySelector('.list');
 
 
 for (let i = 0; i < cities.length; i++) {
-   let tempCity = prompt(`Введите температуру для города ${cities[i]}`)
+   let tempCity = prompt(`Введите температуру для города ${cities[i]}`);
    tempCity = Number(tempCity);
+
+   if (isNaN(tempCity)) {
+      tempCity = +prompt(`Введите корректную температуру для города ${cities[i]}`)
+   }
    temp.push(tempCity);
 }
+
+
 for (let i = 0; i < cities.length; i++) {
    let elemList = document.createElement('li');
    elemList.textContent = `Температура в городе ${cities[i]}: ${temp[i]}\xB0C`;
@@ -17,25 +23,17 @@ for (let i = 0; i < cities.length; i++) {
 
 // находим максимальную температуру
 
-let maxTemp = temp[0];
-for (let max of temp) {
-   if (max > maxTemp) {
-      maxTemp = max;
-   }
-}
+let maxT = Math.max(...temp);
 let maxTempOut = document.createElement('p');
-maxTempOut.textContent = `Максимальная температура равна: ${maxTemp}\xB0C`;
+maxTempOut.textContent = `Максимальная температура равна: ${maxT}\xB0C`;
 list.append(maxTempOut);
 
+
+
 // находим минимальную температуру
-let minTemp = temp[0];
-for (let min of temp) {
-   if (min < minTemp) {
-      minTemp = min;
-   }
-}
+let minT = Math.min(...temp);
 let minTempOut = document.createElement('p');
-minTempOut.textContent = `Минимальная температура равна: ${minTemp}\xB0C`;
+minTempOut.textContent = `Минимальная температура равна: ${minT}\xB0C`;
 list.append(minTempOut);
 
 
